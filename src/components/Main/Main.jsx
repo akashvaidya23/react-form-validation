@@ -14,24 +14,30 @@ const Main = () => {
   const [btnRating, setBtnRating] = useState("");
   const [btnName, setBtnName] = useState("");
   const [btnComment, setButtonComment] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [modal, setModal] = useState(false);
+
   const dropdownClickHandler = (e) => {
     const value = e.target.value;
     setRating(value);
   };
+
   const inputChangeHandler = (e) => {
     const value = e.target.value;
     setName(value);
   };
+
   const textareachangeHandler = (e) => {
     const value = e.target.value;
     setComment(value);
   };
+
   const btnClickHandler = () => {
     setBtnRating(rating);
     setBtnName(name);
     setButtonComment(comment);
+    setModal(true);
   };
+
   return (
     <>
       <div className={styles.main}>
@@ -52,10 +58,20 @@ const Main = () => {
           <Textarea textareachangeHandler={textareachangeHandler} />
         </div>
         <div style={{ marginTop: "20px" }}>
-          <Button btnClickHandler={btnClickHandler} />
+          <Button
+            btnClickHandler={btnClickHandler}
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          />
         </div>
         <div>
-          <Display rating={btnRating} name={btnName} comment={btnComment} />
+          <Display
+            rating={btnRating}
+            name={btnName}
+            comment={btnComment}
+            modal={modal}
+          />
         </div>
       </div>
     </>
