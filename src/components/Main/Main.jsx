@@ -1,41 +1,50 @@
 import { useState } from "react";
-import Button from "../../Button/Button";
-import Display from "../Display/Display";
 import Dropdown from "../Dropdown/Dropdown";
 import Input from "../Input/Input";
 import Label from "../Label/Label";
 import Textarea from "../Textarea/Textarea";
 import styles from "./Main.module.css";
+import { Modal, Button } from "react-bootstrap";
 
 const Main = () => {
   const [rating, setRating] = useState("");
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
-  const [btnRating, setBtnRating] = useState("");
-  const [btnName, setBtnName] = useState("");
-  const [btnComment, setButtonComment] = useState("");
   const [modal, setModal] = useState(false);
 
   const dropdownClickHandler = (e) => {
-    const value = e.target.value;
-    setRating(value);
+    const rate = e.target.value;
+    setRating(rate);
   };
 
   const inputChangeHandler = (e) => {
-    const value = e.target.value;
-    setName(value);
+    const nam = e.target.value;
+    setName(nam);
   };
 
   const textareachangeHandler = (e) => {
-    const value = e.target.value;
-    setComment(value);
+    const comments = e.target.value;
+    setComment(comments);
   };
 
   const btnClickHandler = () => {
-    setBtnRating(rating);
-    setBtnName(name);
-    setButtonComment(comment);
-    setModal(true);
+    if (rating.trim() && name.trim() && comment.trim()) {
+      if (name.length < 2 || name.length > 15) {
+        setModal(false);
+      } else {
+        setModal(true);
+        setRating(rating);
+        setName(name);
+        setComment(comment);
+      }
+    }
+  };
+
+  const handleClose = () => {
+    setModal(false);
+    setRating("");
+    setName("");
+    setComment("");
   };
 
   return (
@@ -58,20 +67,26 @@ const Main = () => {
           <Textarea textareachangeHandler={textareachangeHandler} />
         </div>
         <div style={{ marginTop: "20px" }}>
-          <Button
-            btnClickHandler={btnClickHandler}
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          />
+          <Button variant="primary" onClick={btnClickHandler}>
+            Submit
+          </Button>
         </div>
         <div>
-          <Display
-            rating={btnRating}
-            name={btnName}
-            comment={btnComment}
-            modal={modal}
-          />
+          <Modal show={modal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <b>Your Rating:</b> <p>{rating}</p>
+              <b>Your Name:</b> <p>{name}</p>
+              <b>Your Comment:</b> <p>{comment}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </>

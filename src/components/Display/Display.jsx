@@ -3,9 +3,6 @@ import { Modal, Button } from "react-bootstrap";
 
 const Display = ({ rating, name, comment, modal }) => {
   console.log(modal);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow({ modal });
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
