@@ -4,3 +4,14 @@
   justify-content: center;
   align-items: center;
 }
+
+.error {
+  color: red;
+  font-weight: bolder;
+  margin-top: 20px;
+}
+
+.nameError {
+  color: red;
+  font-weight: bolder;
+}

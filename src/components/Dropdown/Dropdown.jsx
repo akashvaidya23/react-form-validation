@@ -1,4 +1,4 @@
-const Dropdown = ({ name, id, dropdownClickHandler }) => {
+const Dropdown = ({ reference, rValue, name, id, dropdownClickHandler }) => {
   return (
     <select
       name={name}
@@ -6,6 +6,8 @@ const Dropdown = ({ name, id, dropdownClickHandler }) => {
       className="form-select"
       style={{ width: "410px" }}
       onChange={dropdownClickHandler}
+      value={rValue}
+      ref={reference}
     >
       <option value="">Select an Option</option>
       <option value="1">1</option>

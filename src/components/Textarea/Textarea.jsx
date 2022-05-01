@@ -1,4 +1,4 @@
-const Textarea = ({ textareachangeHandler }) => {
+const Textarea = ({ reference, value, textareachangeHandler }) => {
   return (
     <textarea
       className="form-control"
@@ -6,6 +6,8 @@ const Textarea = ({ textareachangeHandler }) => {
       rows="3"
       cols="50"
       onChange={textareachangeHandler}
+      value={value}
+      ref={reference}
     ></textarea>
   );
 };
